@@ -1,0 +1,6 @@
+Set-Location {{pkg.svc_path}}
+if(Test-Path var) { Remove-Item var -Recurse -Force }
+New-Item -Name var -ItemType Junction -target "{{pkg.path}}/www" | Out-Null
+cd var
+(Get-Content {{pkg.svc_config_path}}/Web.config).replace("Data Source={{bind.cluster.first.cfg.name}},", "Data Source={{bind.cluster.first.cfg.name}}.$((Get-ciminstance win32_computersystem).Domain),") | Set-Content {{pkg.svc_config_path}}/Web.config
+New-Item -Name Web.config -ItemType SymbolicLink -target "{{pkg.svc_config_path}}/Web.config" -Force | Out-Null
