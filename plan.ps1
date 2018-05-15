@@ -1,6 +1,6 @@
 $pkg_name="ContosoUniversity"
 $pkg_origin="mwrock"
-$pkg_version="0.1.0"
+$pkg_version="0.2.0"
 $pkg_maintainer="Matt Wrock"
 $pkg_license=@('MIT')
 $pkg_description="A sample ASP.NET Full EFF IIS app"
