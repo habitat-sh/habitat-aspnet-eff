@@ -1,4 +1,4 @@
-$pkg_name="ContosoUniversity"
+$pkg_name="contosouniversity"
 $pkg_origin="mwrock"
 $pkg_version="0.2.0"
 $pkg_maintainer="Matt Wrock"
