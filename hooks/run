@@ -16,6 +16,12 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess {
 Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
 Start-DscCore (Join-Path {{pkg.svc_config_path}} website.ps1) NewWebsite
 
+$pool = "{{cfg.app_pool}}"
+$access = New-Object System.Security.AccessControl.FileSystemAccessRule "IIS APPPOOL\$pool", "ReadAndExecute", "Allow"
+$acl = Get-Acl "{{pkg.svc_config_path}}/Web.config"
+$acl.SetAccessRule($access)
+$acl | Set-Acl "{{pkg.svc_config_path}}/Web.config"
+
 try {
     Write-Host "{{pkg.name}} is running"
     $running = $true
