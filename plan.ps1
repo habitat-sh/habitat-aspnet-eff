@@ -43,4 +43,5 @@ function Invoke-Build {
 function Invoke-Install {
   MSBuild "C#/$pkg_name/${pkg_name}.csproj" /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=$pkg_prefix/www
   Remove-Item $pkg_prefix/www/Web.config
+  (Get-Content "$pkg_prefix/www/views/home/Index.cshtml").replace("Welcome to Contoso University", "Welcome to Contoso University - $pkg_version") | Set-Content "$pkg_prefix/www/views/home/Index.cshtml"
 }
