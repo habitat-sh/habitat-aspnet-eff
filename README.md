@@ -90,7 +90,7 @@ New-NetFirewallRule -DisplayName "Habitat UDP" -Direction Inbound -Action Allow 
 
 ### Running the Habitat Supervisor as a Windows Service on SQL1 and SQL2
 
-Tis is not crucial but it will come in extremely handy if you want to watch the supervisor output from sql1 and sql2 on your admin VM so you don't have to jump around to different RDP sessions. Because the clustering configuration that Habitat does cannot run over winrm, you cannot start the supervisor of sql1 and sql2 from a remote console. Instead, you can run the supervisor locally as a service and then simply stream the supervisor log from a remote console.
+This is not crucial but it will come in extremely handy if you want to watch the supervisor output from sql1 and sql2 on your admin VM so you don't have to jump around to different RDP sessions. Because the clustering configuration that Habitat does cannot run over winrm, you cannot start the supervisor of sql1 and sql2 from a remote console. Instead, you can run the supervisor locally as a service and then simply stream the supervisor log from a remote console.
 
 Follow these steps on SQL1 and SQL2:
 
@@ -129,7 +129,7 @@ You have already installed Chocolatey so run:
 choco install sql-server-management-studio -y
 ```
 
-### Star the SQL Server services
+### Start the SQL Server services
 
 It is going to be easiest to manage all hab interaction from one VM. The `admin` vm is probably best. I like to use 2 desktops on the admin VM. On the first desktop I run Sql Server Management Studio and a browser where I run the .Net app. On the second I arrange 6 powershell consoles for viewing and interacting with the supervisors.
 
@@ -152,6 +152,7 @@ You should now begin to see some activity in the supervisor output in the left c
 In the lower left console you will start a local supervisor (peered to the sql servers) running the .net app:
 
 ```
+$env:HAB_FEAT_INSTALL_HOOK=$true
 hab svc start mwrock/ContosoUniversity --peer 10.0.1.4 --bind database:sqlserver.default
 ```
 
