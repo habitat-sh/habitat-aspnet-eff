@@ -1,0 +1,18 @@
+version: '2.2'
+services:
+  sqlserver:
+    image: core/sqlserver
+  contosouniversity:
+    image: mwrock/contosouniversity
+    ports:
+      - 8099:8099
+    links:
+      - sqlserver
+    depends_on:
+      - sqlserver
+    command: --peer sqlserver --bind database:sqlserver.default --strategy at-once --channel unstable
+
+networks:
+  default:
+    external:
+      name: nat
