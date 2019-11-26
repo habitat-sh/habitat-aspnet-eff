@@ -15,7 +15,7 @@ $pkg_build_deps=@(
   "core/dotnet-45-dev-pack",
   "core/visual-build-tools-2017"
 )
-$pkg_source="https://code.msdn.microsoft.com/ASPNET-MVC-Application-b01a9fe8/file/169473/2/ASP.NET%20MVC%20Application%20Using%20Entity%20Framework%20Code%20First.zip"
+$pkg_source="https://webpifeed.blob.core.windows.net/webpifeed/Partners/ASP.NET%20MVC%20Application%20Using%20Entity%20Framework%20Code%20First.zip"
 $pkg_shasum="2259f86eb89fc921ce8481fc3297f3836815f4e2b3cab1f7353f799ec58ed2ef"
 
 $pkg_exports=@{
