@@ -1,11 +1,15 @@
-version: '2.2'
+version: '3'
 services:
   sqlserver:
     image: core/sqlserver
+    environment:
+      - HAB_LICENSE=accept-no-persist
   contosouniversity:
     image: mwrock/contosouniversity
     ports:
-      - 8099:8099
+      - "80:8099"
+    environment:
+      - HAB_LICENSE=accept-no-persist
     links:
       - sqlserver
     depends_on:

@@ -6,14 +6,13 @@ $pkg_license=@('MIT')
 $pkg_description="A sample ASP.NET Full EFF IIS app"
 $pkg_deps=@(
   "core/dotnet-45-runtime",
-  "core/iis-webserverrole",
   "core/iis-aspnet4",
   "core/dsc-core"
 )
 $pkg_build_deps=@(
   "core/nuget",
   "core/dotnet-45-dev-pack",
-  "core/visual-build-tools-2017"
+  "core/visual-build-tools-2019"
 )
 $pkg_source="https://webpifeed.blob.core.windows.net/webpifeed/Partners/ASP.NET%20MVC%20Application%20Using%20Entity%20Framework%20Code%20First.zip"
 $pkg_shasum="2259f86eb89fc921ce8481fc3297f3836815f4e2b3cab1f7353f799ec58ed2ef"
@@ -31,9 +30,6 @@ $pkg_binds_optional=@{
 
 function Invoke-Build {
   nuget restore "C#/$pkg_name/packages.config" -PackagesDirectory "$HAB_CACHE_SRC_PATH/$pkg_dirname/C#/packages" -Source "https://www.nuget.org/api/v2"
-  nuget install MSBuild.Microsoft.VisualStudio.Web.targets -Version 14.0.0.3 -OutputDirectory $HAB_CACHE_SRC_PATH/$pkg_dirname/
-  $env:TargetFrameworkRootPath="$(Get-HabPackagePath dotnet-45-dev-pack)\Program Files\Reference Assemblies\Microsoft\Framework"
-  $env:VSToolsPath = "$HAB_CACHE_SRC_PATH/$pkg_dirname/MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3/tools/VSToolsPath"
   MSBuild "C#/$pkg_name/${pkg_name}.csproj" /t:Build
   if($LASTEXITCODE -ne 0) {
       Write-Error "dotnet build failed!"
